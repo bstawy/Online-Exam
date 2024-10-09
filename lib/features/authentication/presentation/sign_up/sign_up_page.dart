@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../../core/theme/colors_manager.dart';
-import '../../../../../core/theme/font_weight_helper.dart';
-import '../../../../../core/utils/validators.dart';
-import '../../../widgets/custom_input_field.dart';
+import '../../../../core/networking/api_result.dart';
+import '../../../../core/service_locator/service_locator.dart';
+import '../../../../core/theme/colors_manager.dart';
+import '../../../../core/theme/font_weight_helper.dart';
+import '../../../../core/utils/validators.dart';
+import '../../data/models/requests/sign_up_request_model.dart';
+import '../../data/models/responses/sign_up_response_model.dart';
+import '../../domain/use_cases/sign_up_use_case.dart';
+import '../widgets/custom_input_field.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -48,9 +53,51 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
-  void signUp() {
-    if (_formKey.currentState!.validate()) {
-      // Call the API to sign up the user
+  void signUp() async {
+    // if (_formKey.currentState!.validate()) {
+    //   // Call the API to sign up the user
+
+    // }
+    final response = await getIt<SignUpUseCase>().call(
+      SignUpRequestBodyModel(
+        userName: _userNameController.text,
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
+        confirmPassword: _confirmPasswordController.text,
+        phone: _phoneNumberController.text,
+      ),
+    );
+    switch (response) {
+      case Success<SignUpResponseModel?>():
+        ScaffoldMessenger.of(context).showMaterialBanner(
+          MaterialBanner(
+            content: const Text('Sign up successful'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+                },
+                child: const Text('Close'),
+              ),
+            ],
+          ),
+        );
+      case Failure<SignUpResponseModel?>():
+        ScaffoldMessenger.of(context).showMaterialBanner(
+          MaterialBanner(
+            content: Text(response.apiErrorModel.message ?? ""),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+                },
+                child: const Text('Close'),
+              ),
+            ],
+          ),
+        );
     }
   }
 

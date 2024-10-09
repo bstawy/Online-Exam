@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'core/service_locator/service_locator.dart';
 import 'core/theme/app_theme.dart';
-import 'features/authentication/sign_up/presentation/pages/sign_up_page.dart';
+import 'features/authentication/presentation/sign_up/sign_up_page.dart';
 
 void main() {
+  configureDependencies();
   runApp(const OnlineExamApp());
 }
 
