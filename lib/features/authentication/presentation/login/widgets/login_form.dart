@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:online_exam/core/theme/colors_manager.dart';
-import 'package:online_exam/features/authentication/login/presentation/cubit/login_cubit.dart';
-import 'package:online_exam/features/authentication/login/presentation/cubit/login_state.dart';
 
+import '../../../../../core/theme/colors_manager.dart';
+import '../cubit/login_cubit.dart';
+import '../cubit/login_state.dart';
 import 'custom_text_field.dart';
 import 'login_button.dart';
 

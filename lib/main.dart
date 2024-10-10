@@ -1,14 +1,19 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:online_exam/core/theme/app_theme.dart';
-import 'package:online_exam/features/authentication/login/domain/repositories/auth_repository.dart';
-import 'package:online_exam/features/authentication/login/domain/repositories/auth_repository_impl.dart';
-import 'package:online_exam/features/authentication/login/presentation/cubit/login_cubit.dart';
-import 'package:online_exam/features/authentication/login/presentation/pages/login_page.dart';
+
+import 'core/service_locator/service_locator.dart';
+import 'core/theme/app_theme.dart';
+import 'core/utils/app_bloc_observer.dart';
+import 'features/authentication/presentation/login/pages/login_page.dart';
+import 'features/authentication/presentation/sign_up/sign_up_page.dart';
+import 'features/authentication/presentation/sign_up/view_model/sign_up_view_model.dart';
+
+final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
 void main() {
+  configureDependencies();
+  Bloc.observer = AppBlocObserver();
   runApp(const OnlineExamApp());
 }
 
@@ -17,23 +22,28 @@ class OnlineExamApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider<AuthRepository>(
-        create: (context) => AuthRepositoryImpl(Dio()),
-        child: ScreenUtilInit(
-          designSize: const Size(375, 812),
-          minTextAdapt: true,
-          splitScreenMode: true,
-          builder: (context, child) {
-            return MaterialApp(
-              title: 'Online Exam',
-              debugShowCheckedModeBanner: false,
-              theme: AppTheme.appTheme,
-              home: BlocProvider(
-                create: (context) => LoginCubit(context.read<AuthRepository>()),
-                child: const LoginPage(),
-              ),
-            );
-          },
-        ));
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'Online Exam',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.appTheme,
+          navigatorKey: navKey,
+          initialRoute: SignUpPage.routeName,
+          routes: _routes,
+        );
+      },
+    );
   }
 }
+
+Map<String, WidgetBuilder> _routes = {
+  LoginPage.routeName: (context) => const LoginPage(),
+  SignUpPage.routeName: (context) => BlocProvider(
+        create: (context) => getIt<SignUpViewModel>(),
+        child: const SignUpPage(),
+      ),
+};

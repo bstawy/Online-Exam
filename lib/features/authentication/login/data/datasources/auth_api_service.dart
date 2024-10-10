@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:online_exam/features/authentication/login/data/models/sign_in_request.dart';
-import 'package:online_exam/features/authentication/login/data/models/sign_in_response.dart';
 import 'package:retrofit/retrofit.dart';
+
+import '../models/sign_in_request.dart';
+import '../models/sign_in_response.dart';
 
 part 'auth_api_service.g.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/theme/colors_manager.dart';
+import '../../../../core/theme/colors_manager.dart';
 
 class CustomInputField extends StatefulWidget {
   final TextEditingController? controller;
@@ -151,7 +151,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
       obscureText: isTextObscured,
       obscuringCharacter: widget.obscuringCharacter ?? '*',
       maxLength: widget.maxLength,
-      maxLines: maxLines,
+      maxLines: maxLines ?? 1,
       minLines: widget.minLines,
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatters,

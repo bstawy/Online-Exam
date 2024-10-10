@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:online_exam/core/error/failures_dart.dart';
+
+import '../../../../../core/error/failures_dart.dart';
 
 /// `AuthRepository` is an abstract class that defines the contract for authentication-related
 /// operations, specifically user sign-in. Implementations of this repository will provide

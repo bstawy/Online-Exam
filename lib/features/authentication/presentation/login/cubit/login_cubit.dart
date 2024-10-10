@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:online_exam/core/error/failures_dart.dart';
-import 'package:online_exam/features/authentication/login/domain/repositories/auth_repository.dart';
-import 'package:online_exam/features/authentication/login/presentation/cubit/login_state.dart';
+
+import '../../../../../core/error/failures_dart.dart';
+import '../../../login/domain/repositories/auth_repository.dart';
+import 'login_state.dart';
 
 /// `LoginCubit` manages the logic and state for the login screen in the authentication feature.
 /// It extends the `Cubit` from the `flutter_bloc` package, and its state is of type `LoginState`.

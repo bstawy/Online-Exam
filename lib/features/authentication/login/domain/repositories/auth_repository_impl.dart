@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:online_exam/core/error/failures_dart.dart';
-import 'package:online_exam/features/authentication/login/data/datasources/auth_api_service.dart';
-import 'package:online_exam/features/authentication/login/data/models/sign_in_request.dart';
-import 'package:online_exam/features/authentication/login/domain/repositories/auth_repository.dart';
+
+import '../../../../../core/error/failures_dart.dart';
+import '../../data/datasources/auth_api_service.dart';
+import '../../data/models/sign_in_request.dart';
+import 'auth_repository.dart';
 
 /// `AuthRepositoryImpl` is the concrete implementation of the `AuthRepository` interface.
 /// It interacts with the authentication API service to manage user sign-in operations.

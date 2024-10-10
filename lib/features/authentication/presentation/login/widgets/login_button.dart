@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:online_exam/core/theme/colors_manager.dart';
+
+import '../../../../../core/theme/colors_manager.dart';
 
 class LoginButton extends StatelessWidget {
   final VoidCallback onPressed;
