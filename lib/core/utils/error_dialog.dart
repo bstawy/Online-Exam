@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../main.dart';
@@ -25,7 +27,8 @@ class ErrorDialog extends StatelessWidget {
               AssetsManager.errorAnimation,
               repeat: false,
             ),
-            Expanded(child: Text(errorMsg ?? 'An error occurred')),
+            Gap(16.h),
+            Text(errorMsg ?? 'An error occurred'),
           ],
         ),
       ),

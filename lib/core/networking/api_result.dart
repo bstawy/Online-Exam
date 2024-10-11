@@ -1,5 +1,3 @@
-import 'errors/api_error_model.dart';
-
 sealed class ApiResult<T> {}
 
 class Success<T> implements ApiResult<T> {
@@ -8,6 +6,6 @@ class Success<T> implements ApiResult<T> {
 }
 
 class Failure<T> implements ApiResult<T> {
-  ApiErrorModel apiErrorModel;
-  Failure(this.apiErrorModel);
+  Exception exception;
+  Failure(this.exception);
 }
