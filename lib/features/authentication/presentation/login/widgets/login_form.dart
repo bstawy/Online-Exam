@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:online_exam/features/authentication/presentation/sign_up/sign_up_page.dart';
+
 import '../../../../../core/theme/colors_manager.dart';
 import '../cubit/login_cubit.dart';
 import '../cubit/login_state.dart';
@@ -74,7 +76,10 @@ class LoginForm extends StatelessWidget {
                 children: [
                   const Text("Don't have an account?"),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => SignUpPage()));
+                    },
+
                     child: const Text(
                       'Sign up',
                       style: TextStyle(color: ColorsManager.blue),
