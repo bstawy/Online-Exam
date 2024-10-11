@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 extension Navigation on BuildContext {
   Future<dynamic> pushWithAnimation(Widget screen, {Object? arguments}) {
@@ -24,23 +24,23 @@ extension Navigation on BuildContext {
     return Navigator.of(this).pushNamed(routeName, arguments: arguments);
   }
 
-  Future<dynamic> pushReplacementNamed(String routeName,
-      {Object? arguments, bool navigateWithNavBar = false}) {
-    return Navigator.of(this, rootNavigator: !navigateWithNavBar)
+  Future<dynamic> pushReplacementNamed(String routeName, {Object? arguments}) {
+    return Navigator.of(this)
         .pushReplacementNamed(routeName, arguments: arguments);
   }
 
-  Future<dynamic> pushNamedAndRemoveUntil(String routeName,
-      {Object? arguments,
-      required RoutePredicate predicate,
-      bool navigateWithNavBar = false}) {
-    return Navigator.of(this, rootNavigator: !navigateWithNavBar)
+  Future<dynamic> pushNamedAndRemoveUntil(
+    String routeName, {
+    Object? arguments,
+    required RoutePredicate predicate,
+  }) {
+    return Navigator.of(this)
         .pushNamedAndRemoveUntil(routeName, predicate, arguments: arguments);
   }
 
-  void pop() => Navigator.of(this, rootNavigator: true).pop();
+  void popUntil(String routeName) {
+    return Navigator.of(this).popUntil(ModalRoute.withName(routeName));
+  }
 
-  void popUntil(String routeName, {bool navigateWithNavBar = false}) =>
-      Navigator.of(this, rootNavigator: !navigateWithNavBar)
-          .popUntil(ModalRoute.withName(routeName));
+  void pop() => Navigator.of(this, rootNavigator: true).pop();
 }

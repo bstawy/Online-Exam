@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import 'core/service_locator/service_locator.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/app_bloc_observer.dart';
-import 'features/authentication/presentation/login/pages/login_page.dart';
-import 'features/authentication/presentation/sign_up/sign_up_page.dart';
 import 'features/authentication/presentation/login/cubit/login_cubit.dart';
+import 'features/authentication/presentation/login/ui/pages/login_page.dart';
+import 'features/authentication/presentation/sign_up/cubit/sign_up_cubit.dart';
+import 'features/authentication/presentation/sign_up/ui/pages/sign_up_page.dart';
 
 final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
@@ -43,11 +43,11 @@ class OnlineExamApp extends StatelessWidget {
 
 Map<String, WidgetBuilder> _routes = {
   LoginPage.routeName: (context) => BlocProvider(
-    create: (context) => getIt<LoginCubit>(),
-    child: const LoginPage(),
-  ),
+        create: (context) => getIt<LoginCubit>(),
+        child: const LoginPage(),
+      ),
   SignUpPage.routeName: (context) => BlocProvider(
-        create: (context) => getIt<SignUpViewModel>(),
+        create: (context) => getIt<SignUpCubit>(),
         child: const SignUpPage(),
       ),
 };

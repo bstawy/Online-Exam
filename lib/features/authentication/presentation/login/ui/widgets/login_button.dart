@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/theme/colors_manager.dart';
+import '../../../../../../core/theme/colors_manager.dart';
 
 class LoginButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -30,8 +30,13 @@ class LoginButton extends StatelessWidget {
               ? const CircularProgressIndicator(
                   color: ColorsManager.blue,
                 )
-              : const Text('Login',
-                  style: TextStyle(fontSize: 18, color: Colors.white)),
+              : const Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                  ),
+                ),
         ),
       ),
     );

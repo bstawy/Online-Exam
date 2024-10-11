@@ -11,8 +11,6 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
-        leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new), onPressed: () {}),
       ),
       body: const LoginForm(),
     );

@@ -4,6 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../main.dart';
+import '../extensions/navigation_ext.dart';
+import '../extensions/theme_ext.dart';
+import '../theme/colors_manager.dart';
 import 'assets_manager.dart';
 
 void showErrorDialog(String? errorMsg) async {
@@ -19,19 +22,51 @@ class ErrorDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customTextStyles = context.textStyles;
+    final customColors = context.colors;
+
     return AlertDialog(
-      content: IntrinsicHeight(
+      alignment: Alignment.center,
+      actionsAlignment: MainAxisAlignment.center,
+      content: SizedBox(
+        height: 0.25.sh,
         child: Column(
           children: [
-            Lottie.asset(
-              AssetsManager.errorAnimation,
-              repeat: false,
+            SizedBox(
+              height: 120.h,
+              width: 120.w,
+              child: Lottie.asset(
+                AssetsManager.errorAnimation,
+                repeat: false,
+                fit: BoxFit.fitWidth,
+              ),
             ),
             Gap(16.h),
-            Text(errorMsg ?? 'An error occurred'),
+            Text(
+              errorMsg ?? 'An error occurred',
+              style: customTextStyles.labelLarge?.copyWith(
+                color: ColorsManager.black,
+              ),
+            ),
           ],
         ),
       ),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            context.pop();
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: customColors.inverseSurface,
+          ),
+          child: Text(
+            "Got it",
+            style: customTextStyles.labelLarge?.copyWith(
+              color: ColorsManager.lightWhite,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

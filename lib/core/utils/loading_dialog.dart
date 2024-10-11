@@ -19,12 +19,13 @@ class LoadingDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: SizedBox(
-        width: 100.w,
-        height: 100.h,
+        height: 120.h,
+        width: 120.w,
         child: Center(
           child: Lottie.asset(
             AssetsManager.loadingAnimation,
             repeat: true,
+            fit: BoxFit.fitWidth,
           ),
         ),
       ),

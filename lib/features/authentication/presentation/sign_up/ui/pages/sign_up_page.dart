@@ -3,18 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../core/extension/navigation_ext.dart';
-import '../../../../core/extension/theme_ext.dart';
-import '../../../../core/theme/colors_manager.dart';
-import '../../../../core/theme/font_weight_helper.dart';
-import '../../../../core/utils/error_dialog.dart';
-import '../../../../core/utils/loading_dialog.dart';
-import '../../../../core/utils/success_dialog.dart';
-import '../../../../core/utils/validators.dart';
-import '../../data/models/requests/sign_up_request_model.dart';
-import '../login/pages/login_page.dart';
-import '../widgets/custom_input_field.dart';
-import 'view_model/sign_up_view_model.dart';
+import '../../../../../../core/extensions/navigation_ext.dart';
+import '../../../../../../core/extensions/theme_ext.dart';
+import '../../../../../../core/theme/colors_manager.dart';
+import '../../../../../../core/theme/font_weight_helper.dart';
+import '../../../../../../core/utils/error_dialog.dart';
+import '../../../../../../core/utils/loading_dialog.dart';
+import '../../../../../../core/utils/success_dialog.dart';
+import '../../../../../../core/utils/validators.dart';
+import '../../../../data/models/requests/sign_up_request_model.dart';
+import '../../../widgets/custom_input_field.dart';
+import '../../cubit/sign_up_cubit.dart';
 
 class SignUpPage extends StatefulWidget {
   static const String routeName = '/sign-up';
@@ -60,7 +59,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void signUp() async {
     if (_formKey.currentState!.validate()) {
-      context.read<SignUpViewModel>().signUp(
+      context.read<SignUpCubit>().signUp(
             SignUpRequestBodyModel(
               userName: _userNameController.text,
               firstName: _firstNameController.text,
@@ -86,7 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: SingleChildScrollView(
-          child: BlocListener<SignUpViewModel, SignUpState>(
+          child: BlocListener<SignUpCubit, SignUpState>(
             listenWhen: (previous, current) {
               if (previous is SignUpLoading && current is! SignUpLoading) {
                 context.pop();
@@ -97,8 +96,9 @@ class _SignUpPageState extends State<SignUpPage> {
               if (state is SignUpLoading) {
                 showLoadingDialog();
               } else if (state is SignUpSuccess) {
+                // TODO: navigate to login
                 showSuccessDialog();
-              } else if (state is SignUpFailure) {
+              } else if (state is SignUpFail) {
                 showErrorDialog(state.apiErrorModel.message);
               }
             },
@@ -215,7 +215,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          context.pushWithAnimation(const LoginPage());
+                          context.pop();
                         },
                         borderRadius: BorderRadius.circular(15.r),
                         child: RichText(
