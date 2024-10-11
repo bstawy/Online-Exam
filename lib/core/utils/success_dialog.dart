@@ -5,15 +5,15 @@ import 'package:lottie/lottie.dart';
 import '../../main.dart';
 import 'assets_manager.dart';
 
-void showLoadingDialog() async {
+void showSuccessDialog() async {
   return await showDialog(
     context: navKey.currentContext!,
-    builder: (context) => const LoadingDialog(),
+    builder: (context) => const SuccessDialog(),
   );
 }
 
-class LoadingDialog extends StatelessWidget {
-  const LoadingDialog({super.key});
+class SuccessDialog extends StatelessWidget {
+  const SuccessDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class LoadingDialog extends StatelessWidget {
         height: 100.h,
         child: Center(
           child: Lottie.asset(
-            AssetsManager.loadingAnimation,
+            AssetsManager.successAnimation,
             repeat: true,
           ),
         ),

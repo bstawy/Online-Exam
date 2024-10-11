@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../main.dart';
+import 'assets_manager.dart';
 
 void showErrorDialog(String? errorMsg) async {
   return await showDialog(
@@ -16,7 +18,17 @@ class ErrorDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      content: Text(errorMsg ?? 'An error occurred'),
+      content: IntrinsicHeight(
+        child: Column(
+          children: [
+            Lottie.asset(
+              AssetsManager.errorAnimation,
+              repeat: false,
+            ),
+            Expanded(child: Text(errorMsg ?? 'An error occurred')),
+          ],
+        ),
+      ),
     );
   }
 }
