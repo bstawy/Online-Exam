@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -6,9 +5,8 @@ import 'package:dio/dio.dart';
 import 'api_error_model.dart';
 
 class ApiErrorHandler {
-  static ApiErrorModel handle(dynamic error) {
+  static ApiErrorModel handle(Exception error) {
     if (error is DioException) {
-      log("error.message", name: "ApiErrorHandler handle");
       switch (error.type) {
         case DioExceptionType.connectionError:
           return ApiErrorModel(message: "Connection to server failed");
@@ -40,7 +38,6 @@ class ApiErrorHandler {
 }
 
 ApiErrorModel _handleError(int? statusCode, dynamic data) {
-  log("error.message", name: "ApiErrorHandler _handleError");
   return ApiErrorModel(
     statusCode: data['code'] ?? statusCode,
     message: data['message'] ?? "Unknown error occurred",

@@ -3,12 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../core/extension/navigation_ext.dart';
+import '../../../../core/extension/theme_ext.dart';
 import '../../../../core/theme/colors_manager.dart';
 import '../../../../core/theme/font_weight_helper.dart';
 import '../../../../core/utils/error_dialog.dart';
 import '../../../../core/utils/loading_dialog.dart';
+import '../../../../core/utils/success_dialog.dart';
 import '../../../../core/utils/validators.dart';
 import '../../data/models/requests/sign_up_request_model.dart';
+import '../login/pages/login_page.dart';
 import '../widgets/custom_input_field.dart';
 import 'view_model/sign_up_view_model.dart';
 
@@ -55,27 +59,25 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void signUp() async {
-    // if (_formKey.currentState!.validate()) {
-    //   // Call the API to sign up the user
-
-    // }
-    context.read<SignUpViewModel>().signUp(
-          SignUpRequestBodyModel(
-            userName: _userNameController.text,
-            firstName: _firstNameController.text,
-            lastName: _lastNameController.text,
-            email: _emailController.text,
-            password: _passwordController.text,
-            confirmPassword: _confirmPasswordController.text,
-            phone: _phoneNumberController.text,
-          ),
-        );
+    if (_formKey.currentState!.validate()) {
+      context.read<SignUpViewModel>().signUp(
+            SignUpRequestBodyModel(
+              userName: _userNameController.text,
+              firstName: _firstNameController.text,
+              lastName: _lastNameController.text,
+              email: _emailController.text,
+              password: _passwordController.text,
+              confirmPassword: _confirmPasswordController.text,
+              phone: _phoneNumberController.text,
+            ),
+          );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final customTextStyles = Theme.of(context).textTheme;
-    final customColors = Theme.of(context).colorScheme;
+    final customTextStyles = context.textStyles;
+    final customColors = context.colors;
 
     return Scaffold(
       appBar: AppBar(
@@ -87,14 +89,15 @@ class _SignUpPageState extends State<SignUpPage> {
           child: BlocListener<SignUpViewModel, SignUpState>(
             listenWhen: (previous, current) {
               if (previous is SignUpLoading && current is! SignUpLoading) {
-                Navigator.of(context).pop();
+                context.pop();
               }
               return true;
             },
             listener: (context, state) {
               if (state is SignUpLoading) {
-                showLoading();
+                showLoadingDialog();
               } else if (state is SignUpSuccess) {
+                showSuccessDialog();
               } else if (state is SignUpFailure) {
                 showErrorDialog(state.apiErrorModel.message);
               }
@@ -211,7 +214,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          context.pushWithAnimation(const LoginPage());
+                        },
                         borderRadius: BorderRadius.circular(15.r),
                         child: RichText(
                           text: TextSpan(

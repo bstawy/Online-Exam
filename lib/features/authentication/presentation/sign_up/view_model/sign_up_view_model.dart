@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/networking/api_result.dart';
+import '../../../../../core/networking/errors/api_error_handler.dart';
 import '../../../../../core/networking/errors/api_error_model.dart';
 import '../../../data/models/requests/sign_up_request_model.dart';
 import '../../../data/models/responses/sign_up_response_model.dart';
@@ -33,7 +34,11 @@ class SignUpViewModel extends Cubit<SignUpState> {
       case Success<SignUpResponseModel?>():
         emit(SignUpSuccess());
       case Failure<SignUpResponseModel?>():
-        emit(SignUpFailure(response.apiErrorModel));
+        emit(
+          SignUpFailure(
+            ApiErrorHandler.handle(response.exception),
+          ),
+        );
     }
   }
 }
