@@ -5,6 +5,7 @@ import '../../../../../core/networking/api_result.dart';
 import '../../../../../core/networking/errors/api_error_handler.dart';
 import '../../../../../core/networking/errors/api_error_model.dart';
 import '../../../data/models/requests/login_request_model.dart';
+import '../../../data/models/responses/login_response_model.dart';
 import '../../../domain/use_cases/forget_password_use_case.dart';
 import '../../../domain/use_cases/login_use_case.dart';
 
@@ -26,7 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
 
     switch (response) {
       case Success():
-        emit(LoginSuccess());
+        emit(LoginSuccess(response.data!));
       case Failure():
         emit(
           LoginFail(

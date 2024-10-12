@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/caching/tokens_manager.dart';
 import '../../../../../../core/extensions/navigation_ext.dart';
 import '../../../../../../core/utils/error_dialog.dart';
 import '../../../../../../core/utils/loading_dialog.dart';
@@ -33,7 +34,13 @@ class LoginListener extends StatelessWidget {
           showSuccessDialog(
             whenAnimationFinished: () {
               if (context.read<LoginCubit>().rememberUser) {
-                // TODO: save user data
+                final userData = state.userData;
+
+                if (userData.token != null) {
+                  TokensManager.setToken(state.userData.token ?? '');
+                } else {
+                  showErrorDialog('Token is null');
+                }
               }
               // TODO: navigate to home screen
               context.pushNamed(SignUpPage.routeName);
