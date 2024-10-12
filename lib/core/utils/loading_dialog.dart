@@ -18,6 +18,8 @@ class LoadingDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      alignment: Alignment.center,
+      actionsAlignment: MainAxisAlignment.center,
       content: SizedBox(
         height: 120.h,
         width: 120.w,

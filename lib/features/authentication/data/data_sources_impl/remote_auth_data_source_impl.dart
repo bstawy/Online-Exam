@@ -35,4 +35,22 @@ class RemoteAuthDataSourceImpl implements RemoteAuthDataSource {
       },
     );
   }
+
+  @override
+  Future<ApiResult<void>> forgetPassword(String email) async {
+    return await executeApiCall(
+      () {
+        return _apiManager.forgetPassword({'email': email});
+      },
+    );
+  }
+
+  @override
+  Future<ApiResult<void>> verifyResetCode(String pin) async {
+    return await executeApiCall(
+      () {
+        return _apiManager.verifyResetCode({'resetCode': pin});
+      },
+    );
+  }
 }

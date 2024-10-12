@@ -1,6 +1,6 @@
 class ApiErrorModel {
   int? statusCode;
-  String? message;
+  String message;
   dynamic data;
 
   ApiErrorModel({

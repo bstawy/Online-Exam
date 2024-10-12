@@ -12,6 +12,7 @@ import '../../../../../../core/utils/loading_dialog.dart';
 import '../../../../../../core/utils/success_dialog.dart';
 import '../../../../../../core/utils/validators.dart';
 import '../../../../data/models/requests/sign_up_request_model.dart';
+import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_input_field.dart';
 import '../../cubit/sign_up_cubit.dart';
 
@@ -76,7 +77,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final customTextStyles = context.textStyles;
-    final customColors = context.colors;
 
     return Scaffold(
       appBar: AppBar(
@@ -96,8 +96,11 @@ class _SignUpPageState extends State<SignUpPage> {
               if (state is SignUpLoading) {
                 showLoadingDialog();
               } else if (state is SignUpSuccess) {
-                // TODO: navigate to login
-                showSuccessDialog();
+                showSuccessDialog(
+                  whenAnimationFinished: () {
+                    context.pop();
+                  },
+                );
               } else if (state is SignUpFail) {
                 showErrorDialog(state.apiErrorModel.message);
               }
@@ -190,17 +193,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     validator: Validators.validatePhoneNumber,
                   ),
                   Gap(48.h),
-                  ElevatedButton(
-                    onPressed: () => signUp(),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 48.h),
-                      backgroundColor: customColors.primary,
-                      disabledBackgroundColor: ColorsManager.grey,
-                    ),
-                    child: Text(
-                      'Sign up',
-                      style: customTextStyles.labelLarge,
-                    ),
+                  CustomButton(
+                    onPressed: signUp,
+                    text: 'Sign up',
                   ),
                   Gap(16.h),
                   Row(
