@@ -9,4 +9,6 @@ abstract class RemoteAuthDataSource {
       SignUpRequestBodyModel userData);
 
   Future<ApiResult<LoginResponseModel?>> login(LoginRequestBodyModel userData);
+
+  Future<ApiResult<void>> forgetPassword(String email);
 }

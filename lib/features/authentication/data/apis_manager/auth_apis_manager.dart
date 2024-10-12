@@ -25,4 +25,9 @@ abstract class AuthApisManager {
   Future<LoginResponseModel> login(
     @Body() LoginRequestBodyModel loginRequestBody,
   );
+
+  @POST(EndPoints.forgetPassword)
+  Future<void> forgetPassword(
+    @Body() Map<String, dynamic> email,
+  );
 }
