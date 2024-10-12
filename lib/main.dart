@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/service_locator/service_locator.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/app_bloc_observer.dart';
+import 'features/authentication/presentation/forget_password/cubit/reset_password_cubit.dart';
 import 'features/authentication/presentation/forget_password/ui/pages/pin_verification_page.dart';
 import 'features/authentication/presentation/forget_password/ui/pages/reset_password_page.dart';
 import 'features/authentication/presentation/login/cubit/login_cubit.dart';
@@ -52,6 +53,9 @@ Map<String, WidgetBuilder> _routes = {
         create: (context) => getIt<SignUpCubit>(),
         child: const SignUpPage(),
       ),
-  PinVerificationPage.routeName: (context) => const PinVerificationPage(),
+  PinVerificationPage.routeName: (context) => BlocProvider(
+        create: (context) => getIt<ResetPasswordCubit>(),
+        child: const PinVerificationPage(),
+      ),
   ResetPasswordPage.routeName: (context) => const ResetPasswordPage(),
 };

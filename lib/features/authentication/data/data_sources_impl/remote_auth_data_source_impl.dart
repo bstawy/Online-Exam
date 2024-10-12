@@ -44,4 +44,13 @@ class RemoteAuthDataSourceImpl implements RemoteAuthDataSource {
       },
     );
   }
+
+  @override
+  Future<ApiResult<void>> verifyResetCode(String pin) async {
+    return await executeApiCall(
+      () {
+        return _apiManager.verifyResetCode({'resetCode': pin});
+      },
+    );
+  }
 }

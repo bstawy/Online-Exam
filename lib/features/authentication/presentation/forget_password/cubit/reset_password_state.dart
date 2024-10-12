@@ -4,12 +4,22 @@ sealed class ResetPasswordState {}
 
 final class ResetPasswordInitial extends ResetPasswordState {}
 
+final class VerifyResetCodeLoading extends ResetPasswordState {}
+
+final class VerifyResetCodeSuccess extends ResetPasswordState {}
+
+final class VerifyResetCodeFailure extends ResetPasswordState {
+  final ApiErrorModel apiErrorModel;
+
+  VerifyResetCodeFailure(this.apiErrorModel);
+}
+
 final class ResetPasswordLoading extends ResetPasswordState {}
 
 final class ResetPasswordSuccess extends ResetPasswordState {}
 
 final class ResetPasswordFailure extends ResetPasswordState {
-  final String message;
+  final ApiErrorModel apiErrorModel;
 
-  ResetPasswordFailure(this.message);
+  ResetPasswordFailure(this.apiErrorModel);
 }

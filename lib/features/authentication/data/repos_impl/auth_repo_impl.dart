@@ -31,4 +31,9 @@ class AuthRepoImpl implements AuthRepo {
   Future<ApiResult<void>> forgetPassword(String email) async {
     return await _remoteDataSource.forgetPassword(email);
   }
+
+  @override
+  Future<ApiResult<void>> verifyResetCode(String pin) {
+    return _remoteDataSource.verifyResetCode(pin);
+  }
 }
