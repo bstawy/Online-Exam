@@ -17,13 +17,3 @@ final class LoginFail extends LoginState {
 
   LoginFail(this.apiErrorModel);
 }
-
-final class LoginForgetPasswordLoading extends LoginState {}
-
-final class LoginForgetPasswordSuccess extends LoginState {}
-
-final class LoginForgetPasswordFail extends LoginState {
-  final ApiErrorModel apiErrorModel;
-
-  LoginForgetPasswordFail(this.apiErrorModel);
-}

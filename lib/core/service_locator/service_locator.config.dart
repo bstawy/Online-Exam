@@ -60,18 +60,18 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1017.AuthRepoImpl(gh<_i318.RemoteAuthDataSource>()));
     gh.factory<_i146.LoginUseCase>(
         () => _i146.LoginUseCase(gh<_i1006.AuthRepo>()));
+    gh.factory<_i339.LoginCubit>(
+        () => _i339.LoginCubit(gh<_i146.LoginUseCase>()));
     gh.factory<_i582.ForgetPasswordUseCase>(
         () => _i582.ForgetPasswordUseCase(gh<_i1006.AuthRepo>()));
     gh.factory<_i497.SignUpUseCase>(
         () => _i497.SignUpUseCase(gh<_i1006.AuthRepo>()));
     gh.factory<_i182.VerifyResetCodeUseCase>(
         () => _i182.VerifyResetCodeUseCase(gh<_i1006.AuthRepo>()));
-    gh.factory<_i339.LoginCubit>(() => _i339.LoginCubit(
-          gh<_i146.LoginUseCase>(),
+    gh.factory<_i959.ResetPasswordCubit>(() => _i959.ResetPasswordCubit(
           gh<_i582.ForgetPasswordUseCase>(),
+          gh<_i182.VerifyResetCodeUseCase>(),
         ));
-    gh.factory<_i959.ResetPasswordCubit>(
-        () => _i959.ResetPasswordCubit(gh<_i182.VerifyResetCodeUseCase>()));
     gh.factory<_i1001.SignUpCubit>(
         () => _i1001.SignUpCubit(gh<_i497.SignUpUseCase>()));
     return this;

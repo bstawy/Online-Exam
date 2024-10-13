@@ -7,11 +7,11 @@ import '../../../../../../core/extensions/navigation_ext.dart';
 import '../../../../../../core/theme/colors_manager.dart';
 import '../../../../../../core/utils/validators.dart';
 import '../../../../data/models/requests/login_request_model.dart';
+import '../../../forget_password/ui/pages/forget_password_page.dart';
 import '../../../sign_up/ui/pages/sign_up_page.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_input_field.dart';
 import '../../cubit/login_cubit.dart';
-import 'forget_password_listener.dart';
 import 'login_listener.dart';
 
 class LoginForm extends StatefulWidget {
@@ -63,7 +63,6 @@ class _LoginFormState extends State<LoginForm> {
           child: Column(
             children: [
               const LoginListener(),
-              const ForgetPasswordListener(),
               Gap(24.h),
               CustomInputField(
                 controller: _emailController,
@@ -94,9 +93,7 @@ class _LoginFormState extends State<LoginForm> {
                   const Spacer(),
                   TextButton(
                     onPressed: () {
-                      context
-                          .read<LoginCubit>()
-                          .forgetPassword(_emailController.text);
+                      context.pushNamed(ForgetPasswordPage.routeName);
                     },
                     child: const Text(
                       'Forgot password?',
