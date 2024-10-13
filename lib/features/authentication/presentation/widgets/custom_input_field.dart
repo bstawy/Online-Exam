@@ -38,7 +38,7 @@ class CustomInputField extends StatefulWidget {
   final num? scrollPaddingValue;
   final EdgeInsetsGeometry? contentPadding;
   final TextInputType? keyboardType;
-  final TextInputAction? action;
+  final TextInputAction? doneAction;
   final AutovalidateMode? autovalidateMode;
   final String? Function(String?)? validator;
   final void Function(String?)? onChanged, onFieldSubmitted, onSaved;
@@ -51,7 +51,7 @@ class CustomInputField extends StatefulWidget {
   const CustomInputField({
     super.key,
     required this.hint,
-    this.action,
+    this.doneAction,
     this.autovalidateMode,
     this.border,
     this.borderColor,
@@ -155,7 +155,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
       minLines: widget.minLines,
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatters,
-      textInputAction: widget.action ?? TextInputAction.next,
+      textInputAction: widget.doneAction ?? TextInputAction.next,
       scrollPadding: widget.scrollPaddingValue == null
           ? const EdgeInsets.all(20.0)
           : EdgeInsets.only(
@@ -179,15 +179,15 @@ class _CustomInputFieldState extends State<CustomInputField> {
         hintText: widget.hint,
         hintStyle: widget.hintStyle ??
             customTextStyles.bodyLarge?.copyWith(
-              color: ColorsManager.lightGrey,
+              color: ColorsManager.lighterGrey,
             ),
         alignLabelWithHint: true,
         fillColor: (widget.enabled != null && widget.enabled == false)
-            ? widget.disabledBackgroundColor ?? ColorsManager.grey
+            ? widget.disabledBackgroundColor ?? ColorsManager.lightGrey
             : widget.backgroundColor ?? Colors.white,
         filled: widget.isFilled ?? false,
         prefixIcon: widget.prefixIcon,
-        prefixIconColor: ColorsManager.lightGrey,
+        prefixIconColor: ColorsManager.lighterGrey,
         suffixIcon: widget.isPassword ?? false
             ? GestureDetector(
                 onTap: () {
@@ -205,7 +205,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
             OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius ?? 4.r),
               borderSide: BorderSide(
-                color: widget.borderColor ?? ColorsManager.grey,
+                color: widget.borderColor ?? ColorsManager.lightGrey,
                 width: widget.borderWidth ?? 1.3,
               ),
             ),
@@ -214,7 +214,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
               borderRadius:
                   BorderRadius.circular(widget.enabledBorderRadius ?? 4.r),
               borderSide: BorderSide(
-                color: widget.enabledBorderColor ?? ColorsManager.grey,
+                color: widget.enabledBorderColor ?? ColorsManager.lightGrey,
                 width: widget.enabledBorderWidth ?? 1.3,
               ),
             ),

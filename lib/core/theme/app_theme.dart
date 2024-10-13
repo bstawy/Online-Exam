@@ -12,15 +12,25 @@ class AppTheme {
       seedColor: ColorsManager.blue,
       surface: ColorsManager.lightWhite,
     ),
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
+      headlineMedium: TextStyle(
+        color: ColorsManager.blue,
+        fontSize: 20.sp,
+        fontWeight: FontWeightHelper.medium,
+      ),
+      headlineSmall: TextStyle(
+        color: ColorsManager.black,
+        fontSize: 18.sp,
+        fontWeight: FontWeightHelper.medium,
+      ),
       labelLarge: TextStyle(
         color: ColorsManager.lightWhite,
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: FontWeightHelper.medium,
       ),
       bodyLarge: TextStyle(
         color: ColorsManager.black,
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeightHelper.regular,
       ),
     ),

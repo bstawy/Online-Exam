@@ -31,6 +31,8 @@ class ErrorDialog extends StatelessWidget {
       content: SizedBox(
         height: 0.25.sh,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               height: 120.h,
@@ -44,6 +46,7 @@ class ErrorDialog extends StatelessWidget {
             Gap(16.h),
             Text(
               errorMsg ?? 'An error occurred',
+              textAlign: TextAlign.center,
               style: customTextStyles.labelLarge?.copyWith(
                 color: ColorsManager.black,
               ),
