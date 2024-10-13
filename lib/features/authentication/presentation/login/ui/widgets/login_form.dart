@@ -7,7 +7,7 @@ import '../../../../../../core/extensions/navigation_ext.dart';
 import '../../../../../../core/theme/colors_manager.dart';
 import '../../../../../../core/utils/validators.dart';
 import '../../../../data/models/requests/login_request_model.dart';
-import '../../../forget_password/ui/pages/forget_password_page.dart';
+import '../../../reset_password/ui/pages/forget_password_page.dart';
 import '../../../sign_up/ui/pages/sign_up_page.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_input_field.dart';
