@@ -38,7 +38,7 @@ class CustomInputField extends StatefulWidget {
   final num? scrollPaddingValue;
   final EdgeInsetsGeometry? contentPadding;
   final TextInputType? keyboardType;
-  final TextInputAction? action;
+  final TextInputAction? doneAction;
   final AutovalidateMode? autovalidateMode;
   final String? Function(String?)? validator;
   final void Function(String?)? onChanged, onFieldSubmitted, onSaved;
@@ -51,7 +51,7 @@ class CustomInputField extends StatefulWidget {
   const CustomInputField({
     super.key,
     required this.hint,
-    this.action,
+    this.doneAction,
     this.autovalidateMode,
     this.border,
     this.borderColor,
@@ -155,7 +155,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
       minLines: widget.minLines,
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatters,
-      textInputAction: widget.action ?? TextInputAction.next,
+      textInputAction: widget.doneAction ?? TextInputAction.next,
       scrollPadding: widget.scrollPaddingValue == null
           ? const EdgeInsets.all(20.0)
           : EdgeInsets.only(

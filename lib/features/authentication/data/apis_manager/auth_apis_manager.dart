@@ -35,4 +35,9 @@ abstract class AuthApisManager {
   Future<void> verifyResetCode(
     @Body() Map<String, dynamic> pin,
   );
+
+  @PUT(EndPoints.resetPassword)
+  Future<void> resetPassword(
+    @Body() Map<String, dynamic> resetPasswordRequestBody,
+  );
 }

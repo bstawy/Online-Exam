@@ -13,4 +13,6 @@ abstract class RemoteAuthDataSource {
   Future<ApiResult<void>> forgetPassword(String email);
 
   Future<ApiResult<void>> verifyResetCode(String pin);
+
+  Future<ApiResult<void>> resetPassword(String email, String password);
 }

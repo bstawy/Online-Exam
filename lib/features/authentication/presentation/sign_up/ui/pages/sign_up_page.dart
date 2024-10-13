@@ -98,6 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
               } else if (state is SignUpSuccess) {
                 showSuccessDialog(
                   whenAnimationFinished: () {
+                    // TODO: navigate to home page
                     context.pop();
                   },
                 );
@@ -188,7 +189,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: _phoneNumberController,
                     label: 'Phone number',
                     hint: 'Enter your phone number',
-                    action: TextInputAction.done,
+                    doneAction: TextInputAction.done,
                     keyboardType: TextInputType.phone,
                     validator: Validators.validatePhoneNumber,
                   ),
