@@ -26,4 +26,19 @@ class AuthRepoImpl implements AuthRepo {
       LoginRequestBodyModel userData) async {
     return await _remoteDataSource.login(userData);
   }
+
+  @override
+  Future<ApiResult<void>> forgetPassword(String email) async {
+    return await _remoteDataSource.forgetPassword(email);
+  }
+
+  @override
+  Future<ApiResult<void>> verifyResetCode(String pin) async {
+    return await _remoteDataSource.verifyResetCode(pin);
+  }
+
+  @override
+  Future<ApiResult<void>> resetPassword(String email, String password) async {
+    return await _remoteDataSource.resetPassword(email, password);
+  }
 }

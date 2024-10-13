@@ -5,6 +5,7 @@ import '../../../../../core/networking/api_result.dart';
 import '../../../../../core/networking/errors/api_error_handler.dart';
 import '../../../../../core/networking/errors/api_error_model.dart';
 import '../../../data/models/requests/login_request_model.dart';
+import '../../../data/models/responses/login_response_model.dart';
 import '../../../domain/use_cases/login_use_case.dart';
 
 part 'login_cubit_state.dart';
@@ -12,6 +13,8 @@ part 'login_cubit_state.dart';
 @injectable
 class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase _loginUseCase;
+
+  bool rememberUser = false;
 
   LoginCubit(this._loginUseCase) : super(LoginInitial());
 
@@ -22,8 +25,7 @@ class LoginCubit extends Cubit<LoginState> {
 
     switch (response) {
       case Success():
-        // TODO: cache token
-        emit(LoginSuccess());
+        emit(LoginSuccess(response.data!));
       case Failure():
         emit(
           LoginFail(
