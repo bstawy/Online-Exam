@@ -43,7 +43,10 @@ class LoginListener extends StatelessWidget {
                 }
               }
 
-              context.pushNamed(LayoutScreen.routeName);
+              context.pushNamedAndRemoveUntil(
+                LayoutScreen.routeName,
+                predicate: (_) => false,
+              );
             },
           );
         } else if (state is LoginFail) {

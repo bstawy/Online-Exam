@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/theme/colors_manager.dart';
-import '../../../../core/theme/font_weight_helper.dart';
-import '../../../../core/utils/assets_manager.dart';
-import 'custom_bottom_nav_icon.dart';
+import '../../../home/presentation/ui/home_screen.dart';
+import 'widgets/bottom_nav_bar.dart';
 
 class LayoutScreen extends StatefulWidget {
   static const String routeName = '/layout';
@@ -46,10 +43,9 @@ class _LayoutScreenState extends State<LayoutScreen> {
     return Scaffold(
       body: PageView(
         controller: _pageController,
+        onPageChanged: (value) => setState(() => _currentIndex = value),
         children: const [
-          Center(
-            child: Text('Home'),
-          ),
+          HomeScreen(),
           Center(
             child: Text('Result'),
           ),
@@ -58,41 +54,9 @@ class _LayoutScreenState extends State<LayoutScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavBar(
         currentIndex: _currentIndex,
-        onTap: _animateToPage,
-        backgroundColor: ColorsManager.lighterBlue,
-        selectedLabelStyle: TextStyle(
-          color: ColorsManager.blue,
-          fontSize: 12.sp,
-          fontWeight: FontWeightHelper.medium,
-        ),
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: CustomBottomNavIcon(
-              iconPath: AssetsManager.homeNavBarIcon,
-              isSelected: _currentIndex == 0,
-            ),
-            label: 'Explore',
-          ),
-          BottomNavigationBarItem(
-            icon: CustomBottomNavIcon(
-              iconPath: AssetsManager.resultsNavBarIcon,
-              isSelected: _currentIndex == 1,
-            ),
-            label: 'Result',
-          ),
-          BottomNavigationBarItem(
-            icon: CustomBottomNavIcon(
-              iconPath: AssetsManager.profileNavBarIcon,
-              isSelected: _currentIndex == 2,
-            ),
-            label: 'Profile',
-          ),
-        ],
+        animateToPage: _animateToPage,
       ),
     );
   }
