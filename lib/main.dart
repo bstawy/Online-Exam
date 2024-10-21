@@ -13,6 +13,9 @@ import 'features/authentication/presentation/reset_password/ui/pages/pin_verific
 import 'features/authentication/presentation/reset_password/ui/pages/reset_password_page.dart';
 import 'features/authentication/presentation/sign_up/cubit/sign_up_cubit.dart';
 import 'features/authentication/presentation/sign_up/ui/pages/sign_up_page.dart';
+import 'features/home/presentation/cubit/home_cubit.dart';
+import 'features/home/presentation/ui/home_screen.dart';
+import 'features/layout/presentation/ui/layout_screen.dart';
 
 final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
@@ -66,6 +69,9 @@ Map<String, WidgetBuilder> _routes = {
         create: (context) => getIt<ResetPasswordCubit>(),
         child: const ResetPasswordPage(),
       ),
+  LayoutScreen.routeName: (context) => const LayoutScreen(),
+  HomeScreen.routeName: (context) => BlocProvider(
+        create: (context) => getIt<HomeCubit>(),
+        child: const HomeScreen(),
+      ),
 };
-
-// test for pull request
