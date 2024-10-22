@@ -8,6 +8,7 @@ class AppTheme {
   static ThemeData appTheme = ThemeData(
     useMaterial3: true,
     scaffoldBackgroundColor: ColorsManager.lightWhite,
+    fontFamily: 'Poppins',
     colorScheme: ColorScheme.fromSeed(
       seedColor: ColorsManager.blue,
       surface: ColorsManager.lightWhite,
@@ -17,21 +18,25 @@ class AppTheme {
         color: ColorsManager.blue,
         fontSize: 20.sp,
         fontWeight: FontWeightHelper.medium,
+        fontFamily: 'Poppins',
       ),
       headlineSmall: TextStyle(
         color: ColorsManager.black,
         fontSize: 18.sp,
         fontWeight: FontWeightHelper.medium,
+        fontFamily: 'Poppins',
       ),
       labelLarge: TextStyle(
         color: ColorsManager.lightWhite,
         fontSize: 16.sp,
         fontWeight: FontWeightHelper.medium,
+        fontFamily: 'Poppins',
       ),
       bodyLarge: TextStyle(
         color: ColorsManager.black,
         fontSize: 14.sp,
         fontWeight: FontWeightHelper.regular,
+        fontFamily: 'Poppins',
       ),
     ),
     appBarTheme: AppBarTheme(

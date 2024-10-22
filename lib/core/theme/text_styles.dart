@@ -26,6 +26,13 @@ class TextStyles {
     fontFamily: 'Poppins',
   );
 
+  static TextStyle font16BlackRegular = TextStyle(
+    color: Colors.black,
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.regular,
+    fontFamily: 'Poppins',
+  );
+
   static TextStyle font14GreyMedium = TextStyle(
     color: ColorsManager.grey,
     fontSize: 14.sp,

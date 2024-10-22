@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../home/presentation/ui/home_screen.dart';
+import '../../../../core/caching/tokens_manager.dart';
+import '../../../../core/extensions/navigation_ext.dart';
+import '../../../../core/service_locator/service_locator.dart';
+import '../../../authentication/presentation/login/ui/pages/login_page.dart';
+import '../../../subjects/presentation/cubit/subjects_cubit.dart';
+import '../../../subjects/presentation/ui/subjects_page.dart';
 import 'widgets/bottom_nav_bar.dart';
 
 class LayoutScreen extends StatefulWidget {
@@ -44,13 +50,24 @@ class _LayoutScreenState extends State<LayoutScreen> {
       body: PageView(
         controller: _pageController,
         onPageChanged: (value) => setState(() => _currentIndex = value),
-        children: const [
-          HomeScreen(),
-          Center(
+        children: [
+          BlocProvider<SubjectsCubit>(
+            create: (context) => getIt<SubjectsCubit>()..getAllSubjects(),
+            child: const SubjectsPage(),
+          ),
+          const Center(
             child: Text('Result'),
           ),
           Center(
-            child: Text('Profile'),
+            child: ElevatedButton(
+                onPressed: () async {
+                  await TokensManager.deleteToken();
+                  context.pushNamedAndRemoveUntil(
+                    LoginPage.routeName,
+                    predicate: (_) => false,
+                  );
+                },
+                child: const Text('Logout')),
           ),
         ],
       ),
