@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../core/theme/colors_manager.dart';
-import '../../../../core/theme/font_weight_helper.dart';
-import '../../../../core/theme/text_styles.dart';
-import '../cubit/subjects_cubit.dart';
-import 'widgets/subjects_list.dart';
+import '../../../../../core/theme/colors_manager.dart';
+import '../../../../../core/theme/font_weight_helper.dart';
+import '../../../../../core/theme/text_styles.dart';
+import '../../cubit/subjects_cubit.dart';
+import '../widgets/subjects_list.dart';
 
 class SubjectsPage extends StatelessWidget {
   static const String routeName = '/home';

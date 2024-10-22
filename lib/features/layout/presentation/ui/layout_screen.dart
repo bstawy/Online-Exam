@@ -6,7 +6,7 @@ import '../../../../core/extensions/navigation_ext.dart';
 import '../../../../core/service_locator/service_locator.dart';
 import '../../../authentication/presentation/login/ui/pages/login_page.dart';
 import '../../../subjects/presentation/cubit/subjects_cubit.dart';
-import '../../../subjects/presentation/ui/subjects_page.dart';
+import '../../../subjects/presentation/ui/pages/subjects_page.dart';
 import 'widgets/bottom_nav_bar.dart';
 
 class LayoutScreen extends StatefulWidget {
