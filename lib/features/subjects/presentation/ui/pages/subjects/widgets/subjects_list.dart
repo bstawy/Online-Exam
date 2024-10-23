@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../domain/entities/subject_entity.dart';
+import '../../../../../domain/entities/subject_entity.dart';
 import 'subjects_list_item.dart';
 
 class SubjectsList extends StatelessWidget {
