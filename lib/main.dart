@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'core/caching/tokens_manager.dart';
 import 'core/service_locator/service_locator.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/app_bloc_observer.dart';
@@ -13,17 +14,37 @@ import 'features/authentication/presentation/reset_password/ui/pages/pin_verific
 import 'features/authentication/presentation/reset_password/ui/pages/reset_password_page.dart';
 import 'features/authentication/presentation/sign_up/cubit/sign_up_cubit.dart';
 import 'features/authentication/presentation/sign_up/ui/pages/sign_up_page.dart';
+import 'features/layout/presentation/ui/layout_screen.dart';
 
 final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   Bloc.observer = AppBlocObserver();
-  runApp(const OnlineExamApp());
+
+  Future.wait([
+    TokensManager.getToken(),
+  ]).then((value) {
+    String token = value.first ?? "";
+
+    if (token.isNotEmpty) {
+      runApp(
+        const OnlineExamApp(initialRoute: LayoutScreen.routeName),
+      );
+    } else {
+      const OnlineExamApp();
+    }
+  });
 }
 
 class OnlineExamApp extends StatelessWidget {
-  const OnlineExamApp({super.key});
+  final String initialRoute;
+
+  const OnlineExamApp({
+    super.key,
+    this.initialRoute = LoginPage.routeName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +58,7 @@ class OnlineExamApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: AppTheme.appTheme,
           navigatorKey: navKey,
-          initialRoute: LoginPage.routeName,
+          initialRoute: initialRoute,
           routes: _routes,
         );
       },
@@ -66,6 +87,5 @@ Map<String, WidgetBuilder> _routes = {
         create: (context) => getIt<ResetPasswordCubit>(),
         child: const ResetPasswordPage(),
       ),
+  LayoutScreen.routeName: (context) => const LayoutScreen(),
 };
-
-// test for pull request

@@ -6,7 +6,7 @@ import '../../../../../../core/extensions/navigation_ext.dart';
 import '../../../../../../core/utils/error_dialog.dart';
 import '../../../../../../core/utils/loading_dialog.dart';
 import '../../../../../../core/utils/success_dialog.dart';
-import '../../../sign_up/ui/pages/sign_up_page.dart';
+import '../../../../../layout/presentation/ui/layout_screen.dart';
 import '../../cubit/login_cubit.dart';
 
 class LoginListener extends StatelessWidget {
@@ -42,8 +42,11 @@ class LoginListener extends StatelessWidget {
                   showErrorDialog('Token is null');
                 }
               }
-              // TODO: navigate to home screen
-              context.pushNamed(SignUpPage.routeName);
+
+              context.pushNamedAndRemoveUntil(
+                LayoutScreen.routeName,
+                predicate: (_) => false,
+              );
             },
           );
         } else if (state is LoginFail) {
