@@ -1,4 +1,5 @@
 class Exam {
+  final String id;
   final String level;
   final int questionCount;
   final double fromTime;
@@ -6,6 +7,7 @@ class Exam {
   final int durationMinutes;
 
   const Exam({
+    required this.id,
     required this.level,
     required this.questionCount,
     required this.fromTime,

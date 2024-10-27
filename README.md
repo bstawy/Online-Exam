@@ -11,40 +11,78 @@ This project is a starting point for a Flutter application using latest Flutter 
 &nbsp;
 
 ## 📁 Project Structure
-```arduino
 root
-└──lib
-    ├── core
-    │   ├── caching
-    │   ├── extensions
-    │   ├── networking
-    │   ├── service_locator
-    │   ├── theme
-    │   └── utils
-    └── features
-        │   └── authentication
-        │       ├── data
-        │       │   ├── apis_manager
-        │       │   ├── data_source
-        │       │   ├── data_source_impl
-        │       │   ├── models
-        │       │   └── repos_impl
-        │       ├── domain
-        │       │   ├── repos
-        │       │   └── use_cases
-        │       └── presentation
-        │           ├── login
-        │           │   ├── cubit
-        │           │   └── ui
-        │           ├── reset_password
-        │           │   ├── cubit
-        │           │   └── ui
-        │           ├── sign_up
-        │           │   ├── cubit
-        │           │   └── ui
-        │           └── widgets
-        └── main.dart
-```
+├── lib
+│ ├── core
+│ │ ├── caching
+│ │ ├── extensions
+│ │ ├── networking
+│ │ ├── service_locator
+│ │ ├── theme
+│ │ └── utils
+│ ├── features
+│ │ ├── authentication
+│ │ │ ├── data
+│ │ │ │ ├── apis_manager
+│ │ │ │ ├── data_source
+│ │ │ │ ├── data_source_impl
+│ │ │ │ ├── models
+│ │ │ │ └── repos_impl
+│ │ │ ├── domain
+│ │ │ │ ├── repos
+│ │ │ │ └── use_cases
+│ │ │ └── presentation
+│ │ │ ├── login
+│ │ │ │ ├── cubit
+│ │ │ │ └── ui
+│ │ │ ├── reset_password
+│ │ │ │ ├── cubit
+│ │ │ │ └── ui
+│ │ │ ├── sign_up
+│ │ │ │ ├── cubit
+│ │ │ │ └── ui
+│ │ │ └── widgets
+│ │ └── subjects
+│ └── main.dart
+├── subjects
+│ ├── data
+│ │ ├── apis_manager
+│ │ │ ├── subjects_apis_manager.dart
+│ │ │ └── subjects_apis_manager.g.dart
+│ │ ├── data_sources
+│ │ │ └── remote_subjects_data_source.dart
+│ │ ├── data_sources_impl
+│ │ │ └── remote_subjects_data_source_impl.dart
+│ │ ├── models
+│ │ │ ├── metadata_model.dart
+│ │ │ └── subjects_response_model.dart
+│ │ └── repos_impl
+│ │ └── subjects_repo_impl.dart
+│ ├── domain
+│ │ ├── entities
+│ │ │ ├── exam_entity.dart
+│ │ │ └── subject_entity.dart
+│ │ ├── repos
+│ │ │ └── subjects_repo.dart
+│ │ └── use_cases
+│ │ └── get_all_subjects_use_case.dart
+│ ├── presentation
+│ ├── cubit
+│ │ ├── subjects_cubit.dart
+│ │ └── subjects_state.dart
+│ └── ui
+│ ├── pages
+│ ├── exams
+│ │ ├── ui
+│ │ │ └── widgets
+│ │ │ ├── exam_list_item.dart
+│ │ │ └── exams_page.dart
+│ └── subjects
+│ ├── widgets
+│ ├── subjects_list.dart
+│ ├── subjects_list_item.dart
+│ └── subjects_page.dart
+└── main.dart
 
 &nbsp;
 
