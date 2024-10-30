@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:online_exam/features/subjects/presentation/ui/pages/exams/ui/exams_page.dart';
 
 import '../../../../../../../core/theme/colors_manager.dart';
 import '../../../../../../../core/theme/text_styles.dart';
 import '../../../../../domain/entities/subject_entity.dart';
+import '../../exams/ui/exams_page.dart';
 
 class SubjectsListItem extends StatelessWidget {
   final Subject subject;

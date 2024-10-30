@@ -37,6 +37,15 @@ import '../../features/authentication/presentation/reset_password/cubit/reset_pa
     as _i20;
 import '../../features/authentication/presentation/sign_up/cubit/sign_up_cubit.dart'
     as _i1001;
+import '../../features/exam/data/apis_manager/exam_apis_manager.dart' as _i715;
+import '../../features/exam/data/data_sources/remote_questions_data_source.dart'
+    as _i986;
+import '../../features/exam/data/data_sources_impl/remote_questions_data_source_impl.dart'
+    as _i171;
+import '../../features/exam/data/repos_impl/exam_repo_impl.dart' as _i145;
+import '../../features/exam/domain/repos/exam_repo.dart' as _i569;
+import '../../features/exam/domain/use_cases/get_exam_questions.dart' as _i748;
+import '../../features/exam/presentation/cubit/exam_cubit.dart' as _i622;
 import '../../features/subjects/data/apis_manager/subjects_apis_manager.dart'
     as _i201;
 import '../../features/subjects/data/data_sources/remote_subjects_data_source.dart'
@@ -71,14 +80,22 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i768.AuthApisManager(gh<_i361.Dio>()));
     gh.lazySingleton<_i201.SubjectsApisManager>(
         () => _i201.SubjectsApisManager(gh<_i361.Dio>()));
+    gh.lazySingleton<_i715.ExamApisManager>(
+        () => _i715.ExamApisManager(gh<_i361.Dio>()));
     gh.factory<_i910.RemoteSubjectsDataSource>(() =>
         _i489.RemoteSubjectsDataSourceImpl(gh<_i201.SubjectsApisManager>()));
+    gh.factory<_i986.RemoteQuestionsDataSource>(
+        () => _i171.RemoteQuestionsDataSourceImpl(gh<_i715.ExamApisManager>()));
     gh.factory<_i318.RemoteAuthDataSource>(
         () => _i292.RemoteAuthDataSourceImpl(gh<_i768.AuthApisManager>()));
     gh.factory<_i602.SubjectsRepo>(
         () => _i210.SubjectsRepoImpl(gh<_i910.RemoteSubjectsDataSource>()));
+    gh.factory<_i569.ExamRepo>(
+        () => _i145.ExamRepoImpl(gh<_i986.RemoteQuestionsDataSource>()));
     gh.factory<_i173.GetAllSubjectsUseCase>(
         () => _i173.GetAllSubjectsUseCase(gh<_i602.SubjectsRepo>()));
+    gh.factory<_i748.GetExamQuestions>(
+        () => _i748.GetExamQuestions(gh<_i569.ExamRepo>()));
     gh.factory<_i1006.AuthRepo>(
         () => _i1017.AuthRepoImpl(gh<_i318.RemoteAuthDataSource>()));
     gh.factory<_i146.LoginUseCase>(
@@ -93,6 +110,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i497.SignUpUseCase(gh<_i1006.AuthRepo>()));
     gh.factory<_i182.VerifyResetCodeUseCase>(
         () => _i182.VerifyResetCodeUseCase(gh<_i1006.AuthRepo>()));
+    gh.factory<_i622.ExamCubit>(
+        () => _i622.ExamCubit(gh<_i748.GetExamQuestions>()));
     gh.factory<_i624.ResetPasswordUseCase>(
         () => _i624.ResetPasswordUseCase(gh<_i1006.AuthRepo>()));
     gh.factory<_i1001.SignUpCubit>(

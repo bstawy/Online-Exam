@@ -12,4 +12,5 @@ class AssetsManager {
   static const String profileNavBarIcon = '$icons/profile_nav_bar_icon.svg';
 
   static const String examIcon = '$images/exam_icon.png';
+  static const String alarmImage = '$images/alarm_image.png';
 }
