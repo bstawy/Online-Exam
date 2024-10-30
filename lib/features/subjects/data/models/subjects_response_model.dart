@@ -1,45 +1,53 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import '../../domain/entities/subject_entity.dart';
 import 'metadata_model.dart';
 
+@JsonSerializable()
 class SubjectsResponseModel {
-  String? message;
-  MetadataModel? metadata;
-  List<SubjectDataModel>? subjects;
+  final String message;
+  final MetadataModel? metadata;
+  final List<SubjectDataModel> subjects;
 
   SubjectsResponseModel({
-    this.message,
+    required this.message,
     this.metadata,
-    this.subjects,
+    required this.subjects,
   });
 
-  SubjectsResponseModel.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    metadata = json['metadata'] != null
-        ? MetadataModel.fromJson(json['metadata'])
-        : null;
-    if (json['subjects'] != null) {
-      subjects = (json['subjects'] as List)
+  factory SubjectsResponseModel.fromJson(Map<String, dynamic> json) {
+    return SubjectsResponseModel(
+      message: json['message'] as String? ?? '',
+      metadata: json['metadata'] != null
+          ? MetadataModel.fromJson(json['metadata'])
+          : null,
+      subjects: (json['subjects'] as List)
           .map((e) => SubjectDataModel.fromJson(e))
-          .toList();
-    }
+          .toList(),
+    );
   }
 }
 
+@JsonSerializable()
 class SubjectDataModel {
-  String? id;
-  String? name;
-  String? iconUrl;
+  @JsonKey(name: '_id')
+  final String id;
+  final String name;
+  @JsonKey(name: 'icon')
+  final String? iconUrl;
 
   SubjectDataModel({
-    this.id,
-    this.name,
+    required this.id,
+    required this.name,
     this.iconUrl,
   });
 
-  SubjectDataModel.fromJson(Map<String, dynamic> json) {
-    id = json['_id'];
-    name = json['name'];
-    iconUrl = json['icon'];
+  factory SubjectDataModel.fromJson(Map<String, dynamic> json) {
+    return SubjectDataModel(
+      id: json['_id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      iconUrl: json['icon'] as String?,
+    );
   }
 
   Subject toEntity() {
