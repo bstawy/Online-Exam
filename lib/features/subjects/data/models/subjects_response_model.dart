@@ -3,6 +3,8 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../domain/entities/subject_entity.dart';
 import 'metadata_model.dart';
 
+part 'subjects_response_model.g.dart';
+
 @JsonSerializable()
 class SubjectsResponseModel {
   final String message;

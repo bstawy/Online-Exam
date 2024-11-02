@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../../../../core/extensions/navigation_ext.dart';
 import '../../../../../../../core/theme/colors_manager.dart';
 import '../../../../../../../core/theme/text_styles.dart';
 import '../../../../../domain/entities/subject_entity.dart';
@@ -19,12 +20,13 @@ class SubjectsListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ExamsPage(subject: subject),
-          ),
-        );
+        context.pushNamed(ExamsPage.routeName, arguments: subject);
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => ExamsPage(subject: subject),
+        //   ),
+        // );
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 16.h),

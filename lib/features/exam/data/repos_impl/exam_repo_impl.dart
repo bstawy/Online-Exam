@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/caching/tokens_manager.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../exam/domain/entities/question_entity.dart';
 import '../../../exam/domain/repos/exam_repo.dart';
@@ -14,10 +13,7 @@ class ExamRepoImpl implements ExamRepo {
 
   @override
   Future<ApiResult<List<Question>>> getExamQuestions(String examId) async {
-    final String token = await TokensManager.getToken() ?? '';
-
-    final result =
-        await _remoteQuestionsDataSource.getExamQuestions(token, examId);
+    final result = await _remoteQuestionsDataSource.getExamQuestions(examId);
 
     switch (result) {
       case Success():

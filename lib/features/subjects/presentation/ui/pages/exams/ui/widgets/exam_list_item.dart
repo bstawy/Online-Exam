@@ -21,7 +21,7 @@ class ExamListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(QuestionsScreen.routeName);
+        context.pushNamed(QuestionsScreen.routeName, arguments: exam);
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 16.h),
@@ -54,23 +54,19 @@ class ExamListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    exam.level,
+                    exam.title,
                     style: TextStyles.font16BlackRegular,
-                  ),
-                  Text(
-                    '${exam.questionCount} Question',
-                    style: TextStyles.font14GreyMedium,
                   ),
                   Gap(4.h),
                   Text(
-                    'From: ${exam.fromTime.toStringAsFixed(2)}   To: ${exam.toTime.toStringAsFixed(2)}',
+                    '${exam.numberOfQuestions} Question',
                     style: TextStyles.font14GreyMedium,
                   ),
                 ],
               ),
             ),
             Text(
-              '${exam.durationMinutes} Minutes',
+              '${exam.duration} Minutes',
               style: TextStyle(
                 color: ColorsManager.blue,
                 fontSize: 14.sp,

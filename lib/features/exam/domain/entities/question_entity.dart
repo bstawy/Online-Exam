@@ -1,3 +1,4 @@
+import '../../../subjects/domain/entities/exam_entity.dart';
 import '../../../subjects/domain/entities/subject_entity.dart';
 import 'answer_entity.dart';
 
@@ -8,7 +9,7 @@ class Question {
   String? question;
   String? correct;
   Subject? subject;
-  ExamEntity? exam;
+  Exam? exam;
 
   Question({
     this.answers,
@@ -19,22 +20,13 @@ class Question {
     this.subject,
     this.exam,
   });
-}
 
-class ExamEntity {
-  String? id;
-  String? title;
-  int? duration;
-  Subject? subject;
-  int? numberOfQuestions;
-  bool? isActive;
-
-  ExamEntity({
-    this.id,
-    this.title,
-    this.duration,
-    this.subject,
-    this.numberOfQuestions,
-    this.isActive,
-  });
+  Map<String, dynamic> toMap() {
+    return {
+      'type': type,
+      'id': id,
+      'question': question,
+      'correct': correct,
+    };
+  }
 }

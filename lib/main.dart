@@ -16,7 +16,9 @@ import 'features/authentication/presentation/sign_up/cubit/sign_up_cubit.dart';
 import 'features/authentication/presentation/sign_up/ui/pages/sign_up_page.dart';
 import 'features/exam/presentation/cubit/exam_cubit.dart';
 import 'features/exam/presentation/ui/questions_screen.dart';
+import 'features/exam/presentation/ui/times_up_screen.dart';
 import 'features/layout/presentation/ui/layout_screen.dart';
+import 'features/subjects/presentation/ui/pages/exams/ui/exams_page.dart';
 
 final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
 
@@ -92,8 +94,10 @@ Map<String, WidgetBuilder> _routes = {
         child: const ResetPasswordPage(),
       ),
   LayoutScreen.routeName: (context) => const LayoutScreen(),
+  ExamsPage.routeName: (context) => const ExamsPage(),
   QuestionsScreen.routeName: (context) => BlocProvider(
         create: (context) => getIt<ExamCubit>(),
         child: const QuestionsScreen(),
       ),
+  TimesUpScreen.routeName: (context) => const TimesUpScreen(),
 };

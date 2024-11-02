@@ -12,6 +12,13 @@ class TextStyles {
     fontFamily: 'Poppins',
   );
 
+  static TextStyle font20GreenRegular = TextStyle(
+    color: ColorsManager.green,
+    fontSize: 20.sp,
+    fontWeight: FontWeightHelper.regular,
+    fontFamily: 'Poppins',
+  );
+
   static TextStyle font18BlackMedium = TextStyle(
     color: ColorsManager.black,
     fontSize: 18.sp,

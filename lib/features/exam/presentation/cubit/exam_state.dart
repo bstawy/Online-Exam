@@ -23,3 +23,11 @@ final class QuestionChanged extends ExamState {
 
   QuestionChanged(this.currentQuestion);
 }
+
+final class QuizTimesUp extends ExamState {}
+
+final class AnswerSelected extends ExamState {
+  final String selectedAnswer;
+
+  AnswerSelected(this.selectedAnswer);
+}

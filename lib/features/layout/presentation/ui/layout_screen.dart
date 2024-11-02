@@ -60,14 +60,18 @@ class _LayoutScreenState extends State<LayoutScreen> {
           ),
           Center(
             child: ElevatedButton(
-                onPressed: () async {
-                  await TokensManager.deleteToken();
+              onPressed: () async {
+                await TokensManager.deleteToken();
+
+                if (context.mounted) {
                   context.pushNamedAndRemoveUntil(
                     LoginPage.routeName,
                     predicate: (_) => false,
                   );
-                },
-                child: const Text('Logout')),
+                }
+              },
+              child: const Text('Logout'),
+            ),
           ),
         ],
       ),

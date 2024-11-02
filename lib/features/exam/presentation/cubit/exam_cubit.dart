@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -15,10 +17,12 @@ class ExamCubit extends Cubit<ExamState> {
 
   ExamCubit(this._getExamQuestions) : super(ExamInitial());
 
-  int currentQuestion = 1;
+  int currentQuestion = 0;
+  String selectedAnswerKey = '';
+  bool timesUp = false;
 
   List<Question> questions = [];
-  List<String> answers = [];
+  Map<String, String> answers = {};
 
   Future<void> getExamQuestions(String examId) async {
     emit(ExamLoading());
@@ -27,19 +31,40 @@ class ExamCubit extends Cubit<ExamState> {
     switch (response) {
       case Success():
         questions = response.data;
+        log('Questions: ${questions.map((e) => e.toMap())}');
         emit(ExamLoaded(response.data));
       case Failure():
         emit(ExamError(ApiErrorHandler.handle(response.exception)));
     }
   }
 
+  void selectAnswer(String key) {
+    selectedAnswerKey = key;
+    log('Selected answer: $key');
+    log('Current question: ${questions[currentQuestion].id}');
+    answers[questions[currentQuestion].id!] = key;
+    emit(AnswerSelected(key));
+  }
+
+  void setTimesUp() {
+    timesUp = true;
+    emit(QuizTimesUp());
+  }
+
+  String getAnswerForKey(String? key) {
+    if (key == null) return '';
+    return answers[key] ?? '';
+  }
+
   void nextQuestion() {
     currentQuestion++;
+    selectedAnswerKey = getAnswerForKey(questions[currentQuestion].id);
     emit(QuestionChanged(currentQuestion));
   }
 
   void previousQuestion() {
     currentQuestion--;
+    selectedAnswerKey = getAnswerForKey(questions[currentQuestion].id);
     emit(QuestionChanged(currentQuestion));
   }
 }

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../core/theme/colors_manager.dart';
 import '../../../../core/theme/font_weight_helper.dart';
-import '../../../../core/utils/assets_manager.dart';
+import '../../../subjects/domain/entities/exam_entity.dart';
 import '../cubit/exam_cubit.dart';
-import 'widgets/question_item.dart';
+import 'widgets/questions_list.dart';
+import 'widgets/quiz_duration_widget.dart';
+import 'widgets/times_up_listener.dart';
 
 class QuestionsScreen extends StatelessWidget {
   static const String routeName = '/questions';
@@ -14,49 +17,44 @@ class QuestionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ExamCubit>().getExamQuestions('670070a830a3c3c1944a9c63');
+    var exam = ModalRoute.of(context)!.settings.arguments as Exam;
+    context.read<ExamCubit>().getExamQuestions(exam.id);
+    // .getExamQuestions('670070a830a3c3c1944a9c63');
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Exam'),
         titleTextStyle: TextStyle(
-          color: ColorsManager.blue,
+          color: ColorsManager.black,
           fontSize: 20.sp,
           fontWeight: FontWeightHelper.medium,
         ),
         forceMaterialTransparency: true,
         actions: [
-          Image.asset(
-            AssetsManager.alarmImage,
-            width: 24.w,
-            height: 30.h,
+          Padding(
+            padding: EdgeInsets.only(right: 16.w),
+            child: const QuizDuration(
+              duration: 1,
+            ),
           ),
         ],
       ),
       body: Column(
         children: [
+          const TimesUpListener(),
+          Gap(4.h),
           BlocBuilder<ExamCubit, ExamState>(
-            buildWhen: (previous, current) =>
-                current is ExamLoaded || current is QuestionChanged,
-            builder: (context, state) {
-              return Text(
-                  "Question ${context.watch<ExamCubit>().currentQuestion} of ${context.watch<ExamCubit>().questions.length}");
-            },
-          ),
-          BlocBuilder<ExamCubit, ExamState>(
-            buildWhen: (previous, current) => current is! QuestionChanged,
             builder: (context, state) {
               if (state is ExamLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is ExamLoaded) {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: state.questions.length,
-                    itemBuilder: (context, index) {
-                      return QuestionItem(state.questions[index]);
-                    },
+                return SizedBox(
+                  width: 1.sw,
+                  height: 0.7.sh,
+                  child: Center(
+                    child: SizedBox(
+                      width: 50.w,
+                      height: 50.h,
+                      child: const CircularProgressIndicator(),
+                    ),
                   ),
                 );
               } else if (state is ExamError) {
@@ -64,7 +62,9 @@ class QuestionsScreen extends StatelessWidget {
                   child: Text(state.error.message ?? ''),
                 );
               } else {
-                return const SizedBox();
+                return QuestionsList(
+                  questions: context.read<ExamCubit>().questions,
+                );
               }
             },
           ),

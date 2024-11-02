@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'metadata_model.g.dart';
+
+@JsonSerializable()
 class MetadataModel {
   num? currentPage;
   num? numberOfPages;
@@ -9,9 +14,6 @@ class MetadataModel {
     this.limit,
   });
 
-  MetadataModel.fromJson(Map<String, dynamic> json) {
-    currentPage = json['currentPage'];
-    numberOfPages = json['numberOfPages'];
-    limit = json['limit'];
-  }
+  factory MetadataModel.fromJson(Map<String, dynamic> json) =>
+      _$MetadataModelFromJson(json);
 }

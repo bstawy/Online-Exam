@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/caching/tokens_manager.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/generic_api_call.dart';
 import '../../../exam/data/apis_manager/exam_apis_manager.dart';
@@ -14,9 +15,10 @@ class RemoteQuestionsDataSourceImpl implements RemoteQuestionsDataSource {
 
   @override
   Future<ApiResult<ExamQuestionsResponseModel>> getExamQuestions(
-      String token, String examId) async {
+      String examId) async {
+    final token = await TokensManager.getToken();
     return await executeApiCall(() {
-      return _examApisManager.getExamQuestions(token, examId);
+      return _examApisManager.getExamQuestions(token ?? '', examId);
     });
   }
 }

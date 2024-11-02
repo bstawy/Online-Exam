@@ -55,8 +55,11 @@ import '../../features/subjects/data/data_sources_impl/remote_subjects_data_sour
 import '../../features/subjects/data/repos_impl/subjects_repo_impl.dart'
     as _i210;
 import '../../features/subjects/domain/repos/subjects_repo.dart' as _i602;
+import '../../features/subjects/domain/use_cases/get_all_exams_use_case.dart'
+    as _i59;
 import '../../features/subjects/domain/use_cases/get_all_subjects_use_case.dart'
     as _i173;
+import '../../features/subjects/presentation/cubit/exams_cubit.dart' as _i289;
 import '../../features/subjects/presentation/cubit/subjects_cubit.dart'
     as _i722;
 import '../networking/dio/dio_factory.dart' as _i1046;
@@ -94,6 +97,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i145.ExamRepoImpl(gh<_i986.RemoteQuestionsDataSource>()));
     gh.factory<_i173.GetAllSubjectsUseCase>(
         () => _i173.GetAllSubjectsUseCase(gh<_i602.SubjectsRepo>()));
+    gh.factory<_i59.GetAllExamsUseCase>(
+        () => _i59.GetAllExamsUseCase(gh<_i602.SubjectsRepo>()));
     gh.factory<_i748.GetExamQuestions>(
         () => _i748.GetExamQuestions(gh<_i569.ExamRepo>()));
     gh.factory<_i1006.AuthRepo>(
@@ -110,6 +115,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i497.SignUpUseCase(gh<_i1006.AuthRepo>()));
     gh.factory<_i182.VerifyResetCodeUseCase>(
         () => _i182.VerifyResetCodeUseCase(gh<_i1006.AuthRepo>()));
+    gh.factory<_i289.ExamsCubit>(
+        () => _i289.ExamsCubit(gh<_i59.GetAllExamsUseCase>()));
     gh.factory<_i622.ExamCubit>(
         () => _i622.ExamCubit(gh<_i748.GetExamQuestions>()));
     gh.factory<_i624.ResetPasswordUseCase>(

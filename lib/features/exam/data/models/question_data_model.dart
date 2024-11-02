@@ -1,4 +1,5 @@
 import '../../../exam/domain/entities/question_entity.dart';
+import '../../../subjects/data/models/exams_response_model.dart';
 import '../../../subjects/data/models/subjects_response_model.dart';
 import 'answer_model.dart';
 
@@ -7,7 +8,7 @@ class QuestionDataModel {
   String? type;
   String? id;
   String? question;
-  String? correct;
+  String? correctAnswerKey;
   SubjectDataModel? subject;
   ExamDataModel? exam;
 
@@ -16,7 +17,7 @@ class QuestionDataModel {
     this.type,
     this.id,
     this.question,
-    this.correct,
+    this.correctAnswerKey,
     this.subject,
     this.exam,
   });
@@ -29,9 +30,9 @@ class QuestionDataModel {
       });
     }
     type = json['type'];
-    id = json['id'];
+    id = json['_id'];
     question = json['question'];
-    correct = json['correct'];
+    correctAnswerKey = json['correct'];
     subject = json['subject'] != null
         ? SubjectDataModel.fromJson(json['subject'])
         : null;
@@ -44,49 +45,9 @@ class QuestionDataModel {
       type: type,
       id: id,
       question: question,
-      correct: correct,
+      correct: correctAnswerKey,
       subject: subject?.toEntity(),
       exam: exam?.toEntity(),
-    );
-  }
-}
-
-class ExamDataModel {
-  String? id;
-  String? title;
-  int? duration;
-  SubjectDataModel? subject;
-  int? numberOfQuestions;
-  bool? isActive;
-
-  ExamDataModel({
-    this.id,
-    this.title,
-    this.duration,
-    this.subject,
-    this.numberOfQuestions,
-    this.isActive,
-  });
-
-  ExamDataModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    duration = json['duration'];
-    subject = json['subject'] != null
-        ? SubjectDataModel.fromJson(json['subject'])
-        : null;
-    numberOfQuestions = json['numberOfQuestions'];
-    isActive = json['isActive'];
-  }
-
-  ExamEntity toEntity() {
-    return ExamEntity(
-      id: id,
-      title: title,
-      duration: duration,
-      subject: subject!.toEntity(),
-      numberOfQuestions: numberOfQuestions,
-      isActive: isActive,
     );
   }
 }

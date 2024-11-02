@@ -1,12 +1,16 @@
-import 'package:online_exam/features/subjects/domain/entities/exam_entity.dart';
-import 'package:online_exam/features/subjects/domain/repos/exams_repo.dart';
+import 'package:injectable/injectable.dart';
 
+import '../../../../core/networking/api_result.dart';
+import '../entities/exam_entity.dart';
+import '../repos/subjects_repo.dart';
+
+@injectable
 class GetAllExamsUseCase {
-  final ExamsRepo _repo;
+  final SubjectsRepo _repo;
 
   GetAllExamsUseCase(this._repo);
 
-  Future<List<Exam>> call(String subjectId) async {
+  Future<ApiResult<List<Exam>>> call(String subjectId) async {
     return await _repo.getAllExams(subjectId);
   }
 }

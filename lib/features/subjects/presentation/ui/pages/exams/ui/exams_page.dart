@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:online_exam/core/service_locator/service_locator.dart';
-import 'package:online_exam/features/subjects/domain/entities/subject_entity.dart';
-import 'package:online_exam/features/subjects/presentation/cubit/exams_cubit.dart';
-import 'package:online_exam/features/subjects/presentation/cubit/exams_state.dart';
-import 'package:online_exam/features/subjects/presentation/ui/pages/exams/ui/widgets/exam_list_item.dart';
+
+import '../../../../../../../core/service_locator/service_locator.dart';
+import '../../../../../domain/entities/subject_entity.dart';
+import '../../../../cubit/exams_cubit.dart';
+import '../../../../cubit/exams_state.dart';
+import 'widgets/exam_list_item.dart';
 
 class ExamsPage extends StatelessWidget {
-  final Subject subject;
-
-  const ExamsPage({
-    super.key,
-    required this.subject,
-  });
+  static const String routeName = '/exams';
+  const ExamsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final Subject subject =
+        ModalRoute.of(context)?.settings.arguments as Subject;
+
     return BlocProvider(
       create: (context) => getIt<ExamsCubit>()..getAllExams(subject.id),
       child: Scaffold(
@@ -40,7 +40,7 @@ class ExamsPage extends StatelessWidget {
                 },
               );
             } else if (state is ExamsError) {
-              return Center(child: Text(state.message));
+              return Center(child: Text(state.error.message ?? ''));
             }
             return const SizedBox();
           },
