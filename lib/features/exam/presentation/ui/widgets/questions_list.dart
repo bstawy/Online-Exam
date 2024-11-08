@@ -54,9 +54,7 @@ class _QuestionsListState extends State<QuestionsList> {
       children: [
         BlocBuilder<ExamCubit, ExamState>(
           buildWhen: (previous, current) =>
-              current is! ExamLoading ||
-              current is! ExamError ||
-              current is! AnswerSelected,
+              current is ExamLoaded || current is QuestionChanged,
           builder: (context, state) {
             return Text(
                 "Question ${currentPageIndex + 1} of ${widget.questions.length}");
@@ -133,9 +131,11 @@ class _QuestionsListState extends State<QuestionsList> {
                 child: CustomButton(
                   onPressed: () {
                     if (currentPageIndex <
-                        context.read<ExamCubit>().questions.length) {
+                        context.read<ExamCubit>().questions.length - 1) {
                       context.read<ExamCubit>().nextQuestion();
                       _nextPage();
+                    } else {
+                      context.read<ExamCubit>().submitAnswers();
                     }
                   },
                   borderRadius: 10.r,

@@ -33,20 +33,25 @@ class LoginListener extends StatelessWidget {
         } else if (state is LoginSuccess) {
           showSuccessDialog(
             whenAnimationFinished: () {
-              if (context.read<LoginCubit>().rememberUser) {
-                final userData = state.userData;
+              final userData = state.userData;
 
-                if (userData.token != null) {
-                  TokensManager.setToken(state.userData.token ?? '');
+              if (userData.token != null) {
+                TokensManager.setToken(state.userData.token ?? '');
+
+                if (context.read<LoginCubit>().rememberUser) {
+                  TokensManager.setTempToken('false');
                 } else {
-                  showErrorDialog('Token is null');
+                  TokensManager.setTempToken('true');
                 }
-              }
 
-              context.pushNamedAndRemoveUntil(
-                LayoutScreen.routeName,
-                predicate: (_) => false,
-              );
+                context.pushNamedAndRemoveUntil(
+                  LayoutScreen.routeName,
+                  predicate: (_) => false,
+                );
+              } else {
+                showErrorDialog(
+                    'There is no token, please try again or contact support');
+              }
             },
           );
         } else if (state is LoginFail) {

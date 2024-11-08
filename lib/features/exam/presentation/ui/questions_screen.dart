@@ -7,6 +7,7 @@ import '../../../../core/theme/colors_manager.dart';
 import '../../../../core/theme/font_weight_helper.dart';
 import '../../../subjects/domain/entities/exam_entity.dart';
 import '../cubit/exam_cubit.dart';
+import 'widgets/exam_submit_listener.dart';
 import 'widgets/questions_list.dart';
 import 'widgets/quiz_duration_widget.dart';
 import 'widgets/times_up_listener.dart';
@@ -19,7 +20,6 @@ class QuestionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var exam = ModalRoute.of(context)!.settings.arguments as Exam;
     context.read<ExamCubit>().getExamQuestions(exam.id);
-    // .getExamQuestions('670070a830a3c3c1944a9c63');
 
     return Scaffold(
       appBar: AppBar(
@@ -33,17 +33,22 @@ class QuestionsScreen extends StatelessWidget {
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 16.w),
-            child: const QuizDuration(
-              duration: 1,
+            child: QuizDuration(
+              duration: exam.duration,
             ),
           ),
         ],
       ),
       body: Column(
         children: [
+          const ExamSubmitListener(),
           const TimesUpListener(),
           Gap(4.h),
           BlocBuilder<ExamCubit, ExamState>(
+            buildWhen: (previous, current) =>
+                current is ExamLoading ||
+                current is ExamLoaded ||
+                current is ExamError,
             builder: (context, state) {
               if (state is ExamLoading) {
                 return SizedBox(

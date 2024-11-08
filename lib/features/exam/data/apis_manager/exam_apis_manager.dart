@@ -4,6 +4,8 @@ import 'package:retrofit/retrofit.dart';
 
 import '../../../../core/networking/api_constants.dart';
 import '../models/exam_questions_response_model.dart';
+import '../models/submit_answers_response.dart';
+import '../models/user_answer_model.dart';
 
 part 'exam_apis_manager.g.dart';
 
@@ -18,5 +20,10 @@ abstract class ExamApisManager {
   Future<ExamQuestionsResponseModel> getExamQuestions(
     @Header('token') String token,
     @Query('exam') String examId,
+  );
+  @POST(EndPoints.submitExamAnswers)
+  Future<SubmitAnswersResponseModel> submitExamAnswers(
+    @Header('token') String token,
+    @Body() UserAnswerModel answers,
   );
 }

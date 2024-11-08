@@ -11,4 +11,5 @@ class EndPoints {
   static const String getSubjects = "subjects";
   static const String getExams = "exams";
   static const String getExamQuestions = "questions";
+  static const String submitExamAnswers = "questions/check";
 }

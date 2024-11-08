@@ -25,6 +25,11 @@ class QuestionItem extends StatelessWidget {
         Gap(16.h),
         ...question.answers!.map((answer) {
           return BlocBuilder<ExamCubit, ExamState>(
+            bloc: context.read<ExamCubit>(),
+            buildWhen: (previous, current) =>
+                current is ExamLoaded ||
+                current is QuestionChanged ||
+                current is AnswerSelected,
             builder: (context, state) {
               return AnswerItem(answer: answer);
             },

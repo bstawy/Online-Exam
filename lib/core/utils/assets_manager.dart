@@ -13,4 +13,5 @@ class AssetsManager {
 
   static const String examIcon = '$images/exam_icon.png';
   static const String alarmImage = '$images/alarm_image.png';
+  static const String sandClockImage = '$images/sand_clock.png';
 }

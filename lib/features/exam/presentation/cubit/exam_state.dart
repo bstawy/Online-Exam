@@ -31,3 +31,13 @@ final class AnswerSelected extends ExamState {
 
   AnswerSelected(this.selectedAnswer);
 }
+
+final class ExamSubmitting extends ExamState {}
+
+final class ExamSubmitted extends ExamState {}
+
+final class ExamSubmitError extends ExamState {
+  final ApiErrorModel error;
+
+  ExamSubmitError(this.error);
+}

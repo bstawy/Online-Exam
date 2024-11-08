@@ -16,8 +16,8 @@ import 'features/authentication/presentation/sign_up/cubit/sign_up_cubit.dart';
 import 'features/authentication/presentation/sign_up/ui/pages/sign_up_page.dart';
 import 'features/exam/presentation/cubit/exam_cubit.dart';
 import 'features/exam/presentation/ui/questions_screen.dart';
-import 'features/exam/presentation/ui/times_up_screen.dart';
 import 'features/layout/presentation/ui/layout_screen.dart';
+import 'features/result/presentation/ui/result_screen.dart';
 import 'features/subjects/presentation/ui/pages/exams/ui/exams_page.dart';
 
 final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
@@ -28,9 +28,16 @@ void main() {
   Bloc.observer = AppBlocObserver();
 
   Future.wait([
+    TokensManager.isTokenTemp(),
     TokensManager.getToken(),
   ]).then((value) {
-    String token = value.first ?? "";
+    String isTokenTemp = value.first ?? 'true';
+    String token = value[1] ?? "";
+
+    if (isTokenTemp == 'true') {
+      token = "";
+      TokensManager.clear();
+    }
 
     if (token.isNotEmpty) {
       runApp(
@@ -99,5 +106,5 @@ Map<String, WidgetBuilder> _routes = {
         create: (context) => getIt<ExamCubit>(),
         child: const QuestionsScreen(),
       ),
-  TimesUpScreen.routeName: (context) => const TimesUpScreen(),
+  ResultScreen.routeName: (context) => const ResultScreen(),
 };
